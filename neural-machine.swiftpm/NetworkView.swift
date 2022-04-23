@@ -15,10 +15,10 @@ struct NetworkView: View {
     @State private var selectedNetwork = -1;
     
     @State private var images: [NetworkType] = [
-        NetworkType(name: "network"),
-        NetworkType(name: "network"),
-        NetworkType(name: "network"),
-        NetworkType(name: "network"),
+        NetworkType(name: "network-1"),
+        NetworkType(name: "network-2"),
+        NetworkType(name: "network-3"),
+        NetworkType(name: "network-4", isBest: true),
     ]
     
     @StateObject private var scene: DeviceScene = {
@@ -46,13 +46,13 @@ struct NetworkView: View {
         .overlay {
             VStack {
                 HStack(alignment: .top, spacing: 10) {
-                    Image("network")
+                    Image("nick-multi")
                         .overlay(RoundedRectangle(cornerRadius: 2)
                             .stroke(.black, lineWidth: 1))
                         .shadow(radius: 1)
                     
                     Text("Select the network you want to use. Remember that the more neurons the network has, the better it learns to represent someone. A good network is able to learn new things, so find a balance between number of layers and generability.")
-                        .padding(.top, 20)
+                        .foregroundColor(.white)
                 }
                 .frame(
                     width: imageWidth - (imageWidth / 4) - 40,
@@ -61,27 +61,27 @@ struct NetworkView: View {
                 )
                 .padding(.top, 20)
                 
-                VStack(alignment: .center, spacing: 40) {
+                VStack(alignment: .center, spacing: 20) {
                     ForEach(0..<2) { i in
-                        HStack(alignment: .center, spacing: 80) {
+                        HStack(alignment: .center, spacing: 40) {
                             ForEach(0..<2) { j in
                                 VStack {
                                     if (selectedNetwork != (i * 2) + j) {
                                         Image(images[(i * 2) + j].name)
                                             .resizable()
-                                            .frame(width: 270, height: 270, alignment: .center)
                                             .overlay(RoundedRectangle(cornerRadius: 2)
                                                 .stroke(.black, lineWidth: 1))
                                             .shadow(radius: 1)
                                     } else {
                                         Image(images[(i * 2) + j].name)
                                             .resizable()
-                                            .frame(width: 270, height: 270, alignment: .center)
                                             .overlay(RoundedRectangle(cornerRadius: 2)
-                                                .stroke(.green, lineWidth: 1))
+                                                .stroke(.green, lineWidth: 2))
                                             .shadow(radius: 1)
                                     }
                                 }
+                                
+                                .frame(width: 300, height: 280, alignment: .center)
                                 .scaleEffect(images[(i * 2) + j].tapped ? 0.95 : 1)
                                 .animation(.spring(response: 0.4, dampingFraction: 0.6))
                                 .onTapGesture {
@@ -96,11 +96,11 @@ struct NetworkView: View {
                     
                     VStack {
                         Text("Train")
+                            .foregroundColor(.black) //Color(red: 51.0, green: 51.0, blue: 51.0)
                     }
                     .frame(width: screenWidth / 8, height: 20, alignment: .bottom)
-                    .foregroundColor(.white)
                     .padding()
-                    .background(.red)
+                    .background(.yellow) //Color(red: 253, green: 207, blue: 60)
                     .cornerRadius(10)
                     .padding(.top, 10)
                 }
@@ -128,5 +128,6 @@ struct NetworkView: View {
 struct NetworkType {
     var name: String
     var tapped = false
+    var isBest = false
 }
 

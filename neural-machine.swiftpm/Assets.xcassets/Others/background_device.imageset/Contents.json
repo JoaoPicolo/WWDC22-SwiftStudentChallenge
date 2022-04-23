@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "device.png",
+      "filename" : "background_device.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "device@2x.png",
+      "filename" : "background_device@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "device@3x.png",
+      "filename" : "background_device@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

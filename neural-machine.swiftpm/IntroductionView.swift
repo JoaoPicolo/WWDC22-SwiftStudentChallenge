@@ -46,12 +46,12 @@ struct IntroductionView: View {
                     //                    if scene.showedLastMessage {
                     NavigationLink(destination: SelectionView()) {
                         VStack {
-                            Text("Build")
+                            Text("BUILD")
+                                .foregroundColor(.black) //Color(red: 51.0, green: 51.0, blue: 51.0)
                         }
                         .frame(width: screenWidth / 8, height: 20, alignment: .bottom)
-                        .foregroundColor(.white)
                         .padding()
-                        .background(.red)
+                        .background(.yellow) //Color(red: 253, green: 207, blue: 60)
                         .cornerRadius(10)
                         .padding(.bottom, 30)
                         .padding(.leading, screenWidth - (screenWidth / 4))

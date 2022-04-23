@@ -36,7 +36,6 @@ struct SelectionView: View {
     }()
     
     
-    
     var body: some View {
         let imageWidth = scene.deviceNode.size.width
         let imageHeight = scene.deviceNode.size.height
@@ -46,16 +45,18 @@ struct SelectionView: View {
                 .frame(width: screenWidth, height: screenHeight)
                 .ignoresSafeArea()
         }
+        
+        .transition(.asymmetric(insertion: .scale, removal: .opacity))  
         .overlay {
             VStack {
                 HStack(alignment: .top, spacing: 10) {
-                    Image("jair-face")
+                    Image("nick-face")
                         .overlay(RoundedRectangle(cornerRadius: 2)
                             .stroke(.black, lineWidth: 1))
                         .shadow(radius: 1)
                     
                     Text("This is Nick, remove the images were his face can't been seen clarly. This will help our machine learning model to build better videos for our Facial Identification.")
-                        .padding(.top, 20)
+                        .foregroundColor(.white)
                 }
                 .frame(
                     width: imageWidth - (imageWidth / 4) - 40,
@@ -107,14 +108,13 @@ struct SelectionView: View {
                     
                     NavigationLink(destination: AugmentationView()) {
                         VStack {
-                            Text("Next")
+                            Text("NEXT")
+                                .foregroundColor(.black) //Color(red: 51.0, green: 51.0, blue: 51.0)
                         }
                         .frame(width: screenWidth / 8, height: 20, alignment: .bottom)
-                        .foregroundColor(.white)
                         .padding()
-                        .background(.red)
+                        .background(.yellow) //Color(red: 253, green: 207, blue: 60)
                         .cornerRadius(10)
-                        .padding(.top, 10)
                     }
                 }
                 .frame(

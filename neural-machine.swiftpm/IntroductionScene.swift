@@ -9,16 +9,22 @@ import SpriteKit
 
 class IntroductionScene: SKScene, ObservableObject {
     var lines: [SpeechLine] = []
-    var characterNode: SKSpriteNode = SKSpriteNode(imageNamed: "bouman")
+    var characterNode: SKSpriteNode = SKSpriteNode(imageNamed: "bouman-wave")
     var speechBalloonNode = SKSpriteNode(imageNamed: "speech-balloon")
     
     @Published var showedLastMessage = false
     
+    private var background = SKSpriteNode(imageNamed: "background")
+    
     override func didMove(to view: SKView) {
+        background.zPosition = -1
+        background.position = CGPoint(x: (frame.size.width / 2), y: (frame.size.height / 2) + 25)
+        addChild(background)
+        
         characterNode.position = CGPoint(x: frame.midX - 30, y: frame.midY - 120)
         addChild(characterNode)
         
-        speechBalloonNode.position = CGPoint(x: frame.midX - 50, y: frame.midY + 340)
+        speechBalloonNode.position = CGPoint(x: frame.midX - 25, y: frame.midY + 320)
         addChild(speechBalloonNode)
         
         setupAnimation()
@@ -26,7 +32,7 @@ class IntroductionScene: SKScene, ObservableObject {
     
     
     private func setupAnimation() {
-        var accumulatedTime = 0.0
+        var accumulatedTime = 1.0
         
         for line in lines {
             let ballonText = SKLabelNode(text: line.text)
@@ -34,7 +40,7 @@ class IntroductionScene: SKScene, ObservableObject {
             ballonText.fontSize = 25
             ballonText.numberOfLines = 0
             ballonText.alpha = 0
-            ballonText.preferredMaxLayoutWidth = speechBalloonNode.frame.width - 30
+            ballonText.preferredMaxLayoutWidth = speechBalloonNode.frame.width - 50
             ballonText.position = CGPoint(x: 0, y: 10)
             
             let presentTextAction = SKAction.sequence([
