@@ -8,13 +8,13 @@ import PackageDescription
 import AppleProductTypes
 
 let package = Package(
-    name: "Neural Hacker",
+    name: "Neural Learner",
     platforms: [
         .iOS("15.2")
     ],
     products: [
         .iOSApplication(
-            name: "Neural Hacker",
+            name: "Neural Learner",
             targets: ["AppModule"],
             bundleIdentifier: "br.dev.picolo.neural-machine",
             teamIdentifier: "HQJF9G685U",
