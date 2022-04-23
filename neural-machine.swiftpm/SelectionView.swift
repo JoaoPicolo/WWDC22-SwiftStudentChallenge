@@ -13,15 +13,15 @@ struct SelectionView: View {
     private let screenHeight = UIScreen.main.bounds.size.height
     
     @State private var images: [SelectionImage] = [
-        SelectionImage(name: "jair-face", isGood: true),
-        SelectionImage(name: "jair-face", isGood: true),
-        SelectionImage(name: "jair-face", isGood: true),
-        SelectionImage(name: "jair-face", isGood: true),
-        SelectionImage(name: "jair-face", isGood: true),
-        SelectionImage(name: "jair-face", isGood: true),
-        SelectionImage(name: "jair-face", isGood: true),
-        SelectionImage(name: "jair-face", isGood: true),
-        SelectionImage(name: "jair-face", isGood: true),
+        SelectionImage(name: "good-1", isGood: true),
+        SelectionImage(name: "bad-1", isGood: false),
+        SelectionImage(name: "bad-2", isGood: false),
+        SelectionImage(name: "good-3", isGood: true),
+        SelectionImage(name: "bad-3", isGood: false),
+        SelectionImage(name: "bad-4", isGood: false),
+        SelectionImage(name: "good-6", isGood: true),
+        SelectionImage(name: "good-7", isGood: true),
+        SelectionImage(name: "bad-5", isGood: false),
     ]
     
     @StateObject private var scene: DeviceScene = {
@@ -54,7 +54,7 @@ struct SelectionView: View {
                             .stroke(.black, lineWidth: 1))
                         .shadow(radius: 1)
                     
-                    Text("This is Jair, remove the images were his face can't been seen clarly. This will help our machine learning model to build better videos for our Facial Identification.")
+                    Text("This is Nick, remove the images were his face can't been seen clarly. This will help our machine learning model to build better videos for our Facial Identification.")
                         .padding(.top, 20)
                 }
                 .frame(
@@ -63,21 +63,32 @@ struct SelectionView: View {
                     alignment: .bottom
                 )
                 .padding(.top, 20)
+                .padding(.bottom, 20)
                 
                 VStack(alignment: .center, spacing: 20) {
                     ForEach(0..<3) { i in
-                        HStack(alignment: .center, spacing: 60) {
+                        HStack(alignment: .center, spacing: 50) {
                             ForEach(0..<3) { j in
                                 VStack {
                                     if !images[(i * 3) + j].selected {
                                         Image(images[(i * 3) + j].name)
-                                            .overlay(RoundedRectangle(cornerRadius: 2)
-                                                .stroke(.black, lineWidth: 1))
+                                            .resizable()
+                                            .frame(width: 178, height: 182, alignment: .center)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 2)
+                                                    .stroke(.black, lineWidth: 1)
+                                            )
                                             .shadow(radius: 1)
                                     } else {
                                         Image(images[(i * 3) + j].name)
-                                            .overlay(RoundedRectangle(cornerRadius: 2)
-                                                .stroke(.red, lineWidth: 1))
+                                            .resizable()
+                                            .frame(width: 178, height: 182, alignment: .center)
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 2)
+                                                    .stroke(.red, lineWidth: 1)
+                                                    .background(Color(red: 196, green: 196, blue: 196))
+                                                    .opacity(0.6)
+                                            )
                                             .shadow(radius: 1)
                                     }
                                 }
@@ -89,7 +100,6 @@ struct SelectionView: View {
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                                         images[(i * 3) + j].tapped = false
                                     }
-                                    print("Tapped on image \((i * 3) + j)")
                                 }
                             }
                         }
@@ -104,7 +114,7 @@ struct SelectionView: View {
                         .padding()
                         .background(.red)
                         .cornerRadius(10)
-                        .padding(.top, 20)
+                        .padding(.top, 10)
                     }
                 }
                 .frame(

@@ -17,7 +17,7 @@ struct IntroductionView: View {
             SpeechLine(text: "Hi there. I’m Doctor Bouman, I'm the responsible for helping you build our Machine Learning Model", duration: 3),
             SpeechLine(text: "You probably saw in the news that a hacker group took over one of our research centers", duration: 3),
             SpeechLine(text: "This center has important data about the cure of viruses that can attack large groups of people", duration: 3),
-            SpeechLine(text: "Their leader, Jair, is using facial Recognition in order to control the machines, and stop us from acessing our backups", duration: 3),
+            SpeechLine(text: "Their leader, Nick, is using facial Recognition in order to control the machines, and stop us from acessing our backups", duration: 3),
             SpeechLine(text: "Can you help me build a Deep Fake in order to regain access to our system?", duration: 3, isLast: true)
         ]
         

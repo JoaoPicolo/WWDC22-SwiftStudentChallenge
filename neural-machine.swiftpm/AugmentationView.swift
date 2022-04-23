@@ -12,25 +12,25 @@ struct AugmentationView: View {
     private let screenWidth = UIScreen.main.bounds.size.width
     private let screenHeight = UIScreen.main.bounds.size.height
     
-    private var images: [AgumentationImage] = [
-        AgumentationImage(name: "jair-face"),
-        AgumentationImage(name: "jair-face"),
-        AgumentationImage(name: "jair-face"),
-        AgumentationImage(name: "jair-face"),
-        AgumentationImage(name: "jair-face"),
-        AgumentationImage(name: "jair-face"),
-        AgumentationImage(name: "jair-face"),
-        AgumentationImage(name: "jair-face"),
-        AgumentationImage(name: "jair-face"),
-        AgumentationImage(name: "jair-face"),
-        AgumentationImage(name: "jair-face"),
-        AgumentationImage(name: "jair-face"),
-    ]
-    
     @State private var options: [AugmentationType] = [
-        AugmentationType(type: "Flipping"),
-        AugmentationType(type: "Rotation"),
-        AugmentationType(type: "Brightness")
+        AugmentationType(type: "Flipping", images: [
+            AgumentationImage(name: "good-1"),
+            AgumentationImage(name: "good-3"),
+            AgumentationImage(name: "good-6"),
+            AgumentationImage(name: "good-7"),
+        ]),
+        AugmentationType(type: "Rotation", images: [
+            AgumentationImage(name: "good-1"),
+            AgumentationImage(name: "good-3"),
+            AgumentationImage(name: "good-6"),
+            AgumentationImage(name: "good-7"),
+        ]),
+        AugmentationType(type: "Brightness", images: [
+            AgumentationImage(name: "good-1"),
+            AgumentationImage(name: "good-3"),
+            AgumentationImage(name: "good-6"),
+            AgumentationImage(name: "good-7"),
+        ]),
     ]
     
     @StateObject private var scene: DeviceScene = {
@@ -73,30 +73,33 @@ struct AugmentationView: View {
                 )
                 .padding(.top, 20)
                 
-                VStack(alignment: .center, spacing: 20) {
-                    ForEach(0..<3) { i in
-                        HStack {
-                            Image(systemName: options[i].used ? "checkmark.square": "square")
-                            Text(options[i].type)
+                VStack(alignment: .center, spacing: 10) {
+                    VStack {
+                        HStack(alignment: .center) {
+                            Image(systemName: options[0].used ? "checkmark.square": "square")
+                            Text(options[0].type)
                         }
-                        .frame(
-                            width: imageWidth - (imageWidth / 4) - 25,
-                            height: 40,
-                            alignment: .leading
-                        )
-                        
-                        .padding(.bottom, -20)
+                        .frame(width: imageWidth - (imageWidth / 4), height: 30, alignment: .leading)
+                        .padding(.top, 10)
+                        .padding(.leading, 20)
                         .onTapGesture {
-                            options[i].used = !options[i].used
+                            options[0].used = !options[0].used
                         }
                         
                         HStack(alignment: .center, spacing: 30) {
                             ForEach(0..<4) { j in
                                 VStack {
-                                    Image(images[(i * 3) + j].name)
-                                        .resizable()
-                                        .frame(width: 150, height: 150, alignment: .center)
+                                    if (options[0].used) {
+                                        Image(options[0].images[j].name)
+                                            .resizable()
+                                            .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+                                    }
+                                    else {
+                                        Image(options[0].images[j].name)
+                                            .resizable()
+                                    }
                                 }
+                                .frame(width: 150, height: 150, alignment: .center)
                                 .overlay(RoundedRectangle(cornerRadius: 2)
                                     .stroke(.black, lineWidth: 1))
                                 .shadow(radius: 1)
@@ -104,6 +107,74 @@ struct AugmentationView: View {
                         }
                     }
                     
+                    VStack {
+                        HStack(alignment: .center) {
+                            Image(systemName: options[1].used ? "checkmark.square": "square")
+                            Text(options[1].type)
+                        }
+                        .frame(width: imageWidth - (imageWidth / 4), height: 30, alignment: .leading)
+                        .padding(.top, 10)
+                        .padding(.leading, 20)
+                        .onTapGesture {
+                            options[1].used = !options[1].used
+                        }
+                        
+                        HStack(alignment: .center, spacing: 30) {
+                            ForEach(0..<4) { j in
+                                VStack {
+                                    if (options[1].used) {
+                                        Image(options[1].images[j].name)
+                                            .resizable()
+                                            .rotation3DEffect(.degrees([0.0, 90.0, -90.0].randomElement()!), axis: (x: 0, y: 0, z: 1))
+                                            .rotation3DEffect(.degrees([0.0, 180.0].randomElement()!), axis: (x: 1, y: 0, z: 0))
+                                            .scaledToFit()
+                                    }
+                                    else {
+                                        Image(options[1].images[j].name)
+                                            .resizable()
+                                    }
+                                }
+                                .frame(width: 150, height: 150, alignment: .center)
+                                .overlay(RoundedRectangle(cornerRadius: 2)
+                                    .stroke(.black, lineWidth: 1))
+                                .shadow(radius: 1)
+                            }
+                        }
+                    }
+                    
+                    VStack {
+                        HStack(alignment: .center) {
+                            Image(systemName: options[2].used ? "checkmark.square": "square")
+                            Text(options[2].type)
+                        }
+                        .frame(width: imageWidth - (imageWidth / 4), height: 30, alignment: .leading)
+                        .padding(.top, 10)
+                        .padding(.leading, 20)
+                        .onTapGesture {
+                            options[2].used = !options[2].used
+                        }
+                        
+                        HStack(alignment: .center, spacing: 30) {
+                            ForEach(0..<4) { j in
+                                VStack {
+                                    if (options[2].used) {
+                                        Image(options[2].images[j].name)
+                                            .resizable()
+                                            .brightness(Double.random(in: -0.3...0.3))
+                                    }
+                                    else {
+                                        Image(options[2].images[j].name)
+                                            .resizable()
+                                    }
+                                }
+                                .frame(width: 150, height: 150, alignment: .center)
+                                .overlay(RoundedRectangle(cornerRadius: 2)
+                                    .stroke(.black, lineWidth: 1))
+                                .shadow(radius: 1)
+                            }
+                        }
+                    }
+
                     NavigationLink(destination: NetworkView()) {
                         VStack {
                             Text("Next")
@@ -143,6 +214,7 @@ struct AgumentationImage {
 
 struct AugmentationType {
     var type: String
+    var images: [AgumentationImage]
     var used = false
 }
 
