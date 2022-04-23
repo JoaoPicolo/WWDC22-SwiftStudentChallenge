@@ -28,7 +28,7 @@ struct SelectionView: View {
         let screenWidth = UIScreen.main.bounds.size.width
         let screenHeight = UIScreen.main.bounds.size.height
         let scene = DeviceScene()
-    
+        
         scene.size = CGSize(width: screenWidth, height: screenHeight)
         scene.scaleMode = .fill
         scene.backgroundColor = .white
@@ -36,7 +36,7 @@ struct SelectionView: View {
     }()
     
     
-
+    
     var body: some View {
         let imageWidth = scene.deviceNode.size.width
         let imageHeight = scene.deviceNode.size.height
@@ -63,9 +63,8 @@ struct SelectionView: View {
                     alignment: .bottom
                 )
                 .padding(.top, 20)
-//                .background(.red)
                 
-                VStack(alignment: .center, spacing: 40) {
+                VStack(alignment: .center, spacing: 20) {
                     ForEach(0..<3) { i in
                         HStack(alignment: .center, spacing: 60) {
                             ForEach(0..<3) { j in
@@ -95,34 +94,33 @@ struct SelectionView: View {
                             }
                         }
                     }
+                    
+                    NavigationLink(destination: AugmentationView()) {
+                        VStack {
+                            Text("Next")
+                        }
+                        .frame(width: screenWidth / 8, height: 20, alignment: .bottom)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(.red)
+                        .cornerRadius(10)
+                        .padding(.top, 20)
+                    }
                 }
                 .frame(
                     width: imageWidth - (imageWidth / 4) - 20,
                     height: imageHeight - (imageHeight / 20) - 240,
                     alignment: .center
                 )
-//                .background(.green)
-
-                Spacer()
             }
             .frame(
                 width: imageWidth - (imageWidth / 4) - 20,
                 height: imageHeight - (imageHeight / 20),
                 alignment: .topLeading
             )
-//            .background(.blue)
             
         }
         .navigationBarHidden(true)
-    }
-}
-
-class DeviceScene: SKScene, ObservableObject {
-    @Published var deviceNode = SKSpriteNode(imageNamed: "device")
-    
-    override func didMove(to view: SKView) {
-        deviceNode.position = CGPoint(x: frame.midX + 100, y: frame.midY)
-        addChild(deviceNode)
     }
 }
 
