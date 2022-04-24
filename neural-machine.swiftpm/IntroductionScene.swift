@@ -18,13 +18,13 @@ class IntroductionScene: SKScene, ObservableObject {
     
     override func didMove(to view: SKView) {
         background.zPosition = -1
-        background.position = CGPoint(x: (frame.size.width / 2), y: (frame.size.height / 2) + 25)
+        background.position = CGPoint(x: (frame.size.width / 2), y: (frame.size.height / 2))
         addChild(background)
         
-        characterNode.position = CGPoint(x: frame.midX - 30, y: frame.midY - 120)
+        characterNode.position = CGPoint(x: frame.midX - 30, y: frame.midY - 140)
         addChild(characterNode)
         
-        speechBalloonNode.position = CGPoint(x: frame.midX - 25, y: frame.midY + 320)
+        speechBalloonNode.position = CGPoint(x: frame.midX - 25, y: frame.midY + 300)
         addChild(speechBalloonNode)
         
         setupAnimation()

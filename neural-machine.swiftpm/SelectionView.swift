@@ -25,11 +25,22 @@ struct SelectionView: View {
     ]
     
     @StateObject private var scene: DeviceScene = {
+        let screenWidth = UIScreen.main.bounds.size.width
+        let screenHeight = UIScreen.main.bounds.size.height
+        let scene = DeviceScene()
+        
+        scene.size = CGSize(width: screenWidth, height: screenHeight)
+        scene.scaleMode = .fill
+        scene.backgroundColor = .white
+        return scene
+    }()
+    
+    @StateObject private var balloon: InstructionScene = {
         var line: SpeechLine = SpeechLine(text: "The hacker leader is called Nick. First we need to remove images where it's hard to see Nick's face", duration: 3)
     
         let screenWidth = UIScreen.main.bounds.size.width
         let screenHeight = UIScreen.main.bounds.size.height
-        let scene = DeviceScene()
+        let scene = InstructionScene()
         
         scene.size = CGSize(width: screenWidth, height: screenHeight)
         scene.line = line
@@ -130,6 +141,12 @@ struct SelectionView: View {
                 height: imageHeight - (imageHeight / 20),
                 alignment: .topLeading
             )
+            
+            if balloon.showBallon {
+                SpriteView(scene: balloon, options: [.allowsTransparency])
+                    .frame(width: screenWidth, height: screenHeight)
+                    .ignoresSafeArea()
+            }
         }
         .navigationBarHidden(true)
     }

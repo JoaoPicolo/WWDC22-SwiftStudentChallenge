@@ -22,11 +22,22 @@ struct NetworkView: View {
     ]
     
     @StateObject private var scene: DeviceScene = {
+        let screenWidth = UIScreen.main.bounds.size.width
+        let screenHeight = UIScreen.main.bounds.size.height
+        let scene = DeviceScene()
+        
+        scene.size = CGSize(width: screenWidth, height: screenHeight)
+        scene.scaleMode = .fill
+        scene.backgroundColor = .white
+        return scene
+    }()
+    
+    @StateObject private var balloon: InstructionScene = {
         var line: SpeechLine = SpeechLine(text: "Finally we jsut need to select a machine learning architecture to train our model.", duration: 3)
     
         let screenWidth = UIScreen.main.bounds.size.width
         let screenHeight = UIScreen.main.bounds.size.height
-        let scene = DeviceScene()
+        let scene = InstructionScene()
         
         scene.size = CGSize(width: screenWidth, height: screenHeight)
         scene.line = line
@@ -96,16 +107,18 @@ struct NetworkView: View {
                         }
                     }
                     
-                    VStack {
-                        Text("Train")
-                            .foregroundColor(.black) //Color(red: 51.0, green: 51.0, blue: 51.0)
-                            .font(.system(size: 25, weight: .bold, design: .rounded))
+                    NavigationLink(destination: FinalView()) {
+                        VStack {
+                            Text("Train")
+                                .foregroundColor(.black) //Color(red: 51.0, green: 51.0, blue: 51.0)
+                                .font(.system(size: 25, weight: .bold, design: .rounded))
+                        }
+                        .frame(width: screenWidth / 8, height: 20, alignment: .bottom)
+                        .padding()
+                        .background(.yellow) //Color(red: 253, green: 207, blue: 60)
+                        .cornerRadius(10)
+                        .padding(.top, 10)
                     }
-                    .frame(width: screenWidth / 8, height: 20, alignment: .bottom)
-                    .padding()
-                    .background(.yellow) //Color(red: 253, green: 207, blue: 60)
-                    .cornerRadius(10)
-                    .padding(.top, 10)
                 }
                 .frame(
                     width: imageWidth - (imageWidth / 4) - 20,
@@ -120,6 +133,12 @@ struct NetworkView: View {
                 height: imageHeight - (imageHeight / 20),
                 alignment: .topLeading
             )
+            
+            if balloon.showBallon {
+                SpriteView(scene: balloon, options: [.allowsTransparency])
+                    .frame(width: screenWidth, height: screenHeight)
+                    .ignoresSafeArea()
+            }
         }
         .navigationBarHidden(true)
     }

@@ -34,11 +34,22 @@ struct AugmentationView: View {
     ]
     
     @StateObject private var scene: DeviceScene = {
-        var line: SpeechLine = SpeechLine(text: "Now we have to do the augmentation process to generate more good images, and increase our dataset.", duration: 3)
-    
         let screenWidth = UIScreen.main.bounds.size.width
         let screenHeight = UIScreen.main.bounds.size.height
         let scene = DeviceScene()
+        
+        scene.size = CGSize(width: screenWidth, height: screenHeight)
+        scene.scaleMode = .fill
+        scene.backgroundColor = .white
+        return scene
+    }()
+    
+    @StateObject private var balloon: InstructionScene = {
+        var line: SpeechLine = SpeechLine(text: "Now we have to do the augmentation process to generate more good images, and increase our dataset.", duration: 4)
+    
+        let screenWidth = UIScreen.main.bounds.size.width
+        let screenHeight = UIScreen.main.bounds.size.height
+        let scene = InstructionScene()
         
         scene.size = CGSize(width: screenWidth, height: screenHeight)
         scene.line = line
@@ -211,6 +222,12 @@ struct AugmentationView: View {
                 height: imageHeight - (imageHeight / 20),
                 alignment: .topLeading
             )
+            
+            if balloon.showBallon {
+                SpriteView(scene: balloon, options: [.allowsTransparency])
+                    .frame(width: screenWidth, height: screenHeight)
+                    .ignoresSafeArea()
+            }
         }
         .navigationBarHidden(true)
     }

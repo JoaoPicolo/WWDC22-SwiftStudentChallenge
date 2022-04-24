@@ -42,21 +42,21 @@ struct IntroductionView: View {
                 
                 VStack {
                     Spacer()
-                    //                    if scene.showedLastMessage {
-                    NavigationLink(destination: SelectionView()) {
-                        VStack {
-                            Text("BUILD")
-                                .foregroundColor(.black) //Color(red: 51.0, green: 51.0, blue: 51.0)
-                                .font(.system(size: 25, weight: .bold, design: .rounded))
+                    if scene.showedLastMessage {
+                        NavigationLink(destination: SelectionView()) {
+                            VStack {
+                                Text("BUILD")
+                                    .foregroundColor(.black) //Color(red: 51.0, green: 51.0, blue: 51.0)
+                                    .font(.system(size: 25, weight: .bold, design: .rounded))
+                            }
+                            .frame(width: screenWidth / 8, height: 20, alignment: .bottom)
+                            .padding()
+                            .background(.yellow) //Color(red: 253, green: 207, blue: 60)
+                            .cornerRadius(10)
+                            .padding(.bottom, 30)
+                            .padding(.leading, screenWidth - (screenWidth / 4))
                         }
-                        .frame(width: screenWidth / 8, height: 20, alignment: .bottom)
-                        .padding()
-                        .background(.yellow) //Color(red: 253, green: 207, blue: 60)
-                        .cornerRadius(10)
-                        .padding(.bottom, 30)
-                        .padding(.leading, screenWidth - (screenWidth / 4))
                     }
-                    //                    }
                 }
             }
             .navigationBarHidden(true)
