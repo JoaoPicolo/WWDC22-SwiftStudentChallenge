@@ -33,15 +33,16 @@ class IntroductionScene: SKScene, ObservableObject {
     
     private func setupAnimation() {
         var accumulatedTime = 1.0
+        let attributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.black, .font: UIFont.systemFont(ofSize: 30)]
         
         for line in lines {
+            let text = NSAttributedString(string: line.text, attributes: attributes)
             let ballonText = SKLabelNode(text: line.text)
-            ballonText.fontColor = .black
-            ballonText.fontSize = 25
+            ballonText.attributedText = text
             ballonText.numberOfLines = 0
             ballonText.alpha = 0
             ballonText.preferredMaxLayoutWidth = speechBalloonNode.frame.width - 50
-            ballonText.position = CGPoint(x: 0, y: 10)
+            ballonText.position = CGPoint(x: 0, y: 0)
             
             let presentTextAction = SKAction.sequence([
                 SKAction.wait(forDuration: accumulatedTime),

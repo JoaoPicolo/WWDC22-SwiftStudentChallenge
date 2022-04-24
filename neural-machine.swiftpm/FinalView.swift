@@ -32,16 +32,12 @@ struct FinalView: View {
     }()
     
     var body: some View {
-        NavigationView {
-            VStack {
-                SpriteView(scene: scene)
-                    .frame(width: screenWidth, height: screenHeight)
-                    .ignoresSafeArea()
-            }
-            .navigationBarHidden(true)
+        ZStack {
+            SpriteView(scene: scene)
+                .frame(width: screenWidth, height: screenHeight)
+                .ignoresSafeArea()
         }
-        .navigationViewStyle(.stack)
-        .ignoresSafeArea()
+        .navigationBarHidden(true)
     }
 }
 

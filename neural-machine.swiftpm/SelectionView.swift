@@ -25,11 +25,14 @@ struct SelectionView: View {
     ]
     
     @StateObject private var scene: DeviceScene = {
+        var line: SpeechLine = SpeechLine(text: "The hacker leader is called Nick. First we need to remove images where it's hard to see Nick's face", duration: 3)
+    
         let screenWidth = UIScreen.main.bounds.size.width
         let screenHeight = UIScreen.main.bounds.size.height
         let scene = DeviceScene()
         
         scene.size = CGSize(width: screenWidth, height: screenHeight)
+        scene.line = line
         scene.scaleMode = .fill
         scene.backgroundColor = .white
         return scene
@@ -40,23 +43,21 @@ struct SelectionView: View {
         let imageWidth = scene.deviceNode.size.width
         let imageHeight = scene.deviceNode.size.height
         
-        VStack {
+        ZStack {
             SpriteView(scene: scene)
                 .frame(width: screenWidth, height: screenHeight)
                 .ignoresSafeArea()
-        }
-        
-        .transition(.asymmetric(insertion: .scale, removal: .opacity))  
-        .overlay {
+            
             VStack {
                 HStack(alignment: .top, spacing: 10) {
                     Image("nick-face")
                         .overlay(RoundedRectangle(cornerRadius: 2)
-                            .stroke(.black, lineWidth: 1))
+                            .stroke(.black, lineWidth: 0))
                         .shadow(radius: 1)
                     
                     Text("This is Nick, remove the images were his face can't been seen clarly. This will help our machine learning model to build better videos for our Facial Identification.")
                         .foregroundColor(.white)
+                        .font(.system(size: 24, weight: .regular, design: .rounded))
                 }
                 .frame(
                     width: imageWidth - (imageWidth / 4) - 40,
@@ -110,6 +111,7 @@ struct SelectionView: View {
                         VStack {
                             Text("NEXT")
                                 .foregroundColor(.black) //Color(red: 51.0, green: 51.0, blue: 51.0)
+                                .font(.system(size: 25, weight: .bold, design: .rounded))
                         }
                         .frame(width: screenWidth / 8, height: 20, alignment: .bottom)
                         .padding()
@@ -128,7 +130,6 @@ struct SelectionView: View {
                 height: imageHeight - (imageHeight / 20),
                 alignment: .topLeading
             )
-            
         }
         .navigationBarHidden(true)
     }

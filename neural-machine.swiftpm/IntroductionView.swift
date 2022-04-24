@@ -17,7 +17,7 @@ struct IntroductionView: View {
             SpeechLine(text: "Hi there. I’m Doctor Bouman, I'm the responsible for helping you build our Machine Learning Model", duration: 3),
             SpeechLine(text: "You probably saw in the news that a hacker group took over one of our research centers", duration: 3),
             SpeechLine(text: "This center has important data about the cure of viruses that can attack large groups of people", duration: 3),
-            SpeechLine(text: "Their leader, Nick, is using facial Recognition in order to control the machines, and stop us from acessing our backups", duration: 3),
+            SpeechLine(text: "Their leader is using facial Recognition in order to control the machines, and stop us from acessing our backups", duration: 3),
             SpeechLine(text: "Can you help me build a Deep Fake in order to regain access to our system?", duration: 3, isLast: true)
         ]
         
@@ -35,12 +35,11 @@ struct IntroductionView: View {
     
     var body: some View {
         NavigationView {
-            VStack {
+            ZStack {
                 SpriteView(scene: scene)
                     .frame(width: screenWidth, height: screenHeight)
                     .ignoresSafeArea()
-            }
-            .overlay {
+                
                 VStack {
                     Spacer()
                     //                    if scene.showedLastMessage {
@@ -48,6 +47,7 @@ struct IntroductionView: View {
                         VStack {
                             Text("BUILD")
                                 .foregroundColor(.black) //Color(red: 51.0, green: 51.0, blue: 51.0)
+                                .font(.system(size: 25, weight: .bold, design: .rounded))
                         }
                         .frame(width: screenWidth / 8, height: 20, alignment: .bottom)
                         .padding()
@@ -58,7 +58,6 @@ struct IntroductionView: View {
                     }
                     //                    }
                 }
-                
             }
             .navigationBarHidden(true)
         }

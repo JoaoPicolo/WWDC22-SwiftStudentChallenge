@@ -22,37 +22,39 @@ struct NetworkView: View {
     ]
     
     @StateObject private var scene: DeviceScene = {
+        var line: SpeechLine = SpeechLine(text: "Finally we jsut need to select a machine learning architecture to train our model.", duration: 3)
+    
         let screenWidth = UIScreen.main.bounds.size.width
         let screenHeight = UIScreen.main.bounds.size.height
         let scene = DeviceScene()
         
         scene.size = CGSize(width: screenWidth, height: screenHeight)
+        scene.line = line
         scene.scaleMode = .fill
         scene.backgroundColor = .white
         return scene
     }()
     
     
-    
     var body: some View {
         let imageWidth = scene.deviceNode.size.width
         let imageHeight = scene.deviceNode.size.height
         
-        VStack {
+        ZStack {
             SpriteView(scene: scene)
                 .frame(width: screenWidth, height: screenHeight)
                 .ignoresSafeArea()
-        }
-        .overlay {
+            
             VStack {
                 HStack(alignment: .top, spacing: 10) {
                     Image("nick-multi")
                         .overlay(RoundedRectangle(cornerRadius: 2)
-                            .stroke(.black, lineWidth: 1))
+                            .stroke(.black, lineWidth: 0))
                         .shadow(radius: 1)
                     
                     Text("Select the network you want to use. Remember that the more neurons the network has, the better it learns to represent someone. A good network is able to learn new things, so find a balance between number of layers and generability.")
                         .foregroundColor(.white)
+                        .font(.system(size: 24, weight: .regular, design: .rounded))
                 }
                 .frame(
                     width: imageWidth - (imageWidth / 4) - 40,
@@ -97,6 +99,7 @@ struct NetworkView: View {
                     VStack {
                         Text("Train")
                             .foregroundColor(.black) //Color(red: 51.0, green: 51.0, blue: 51.0)
+                            .font(.system(size: 25, weight: .bold, design: .rounded))
                     }
                     .frame(width: screenWidth / 8, height: 20, alignment: .bottom)
                     .padding()
@@ -117,9 +120,6 @@ struct NetworkView: View {
                 height: imageHeight - (imageHeight / 20),
                 alignment: .topLeading
             )
-            
-            
-            
         }
         .navigationBarHidden(true)
     }
