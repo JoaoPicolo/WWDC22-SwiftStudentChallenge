@@ -21,6 +21,8 @@ class InstructionScene: SKScene, ObservableObject {
         self.backgroundColor = .clear
         
         speechBalloonNode.position = CGPoint(x: frame.midX - 25, y: frame.midY + 320)
+        speechBalloonNode.alpha = 0
+        speechBalloonNode.run(SKAction.fadeIn(withDuration: 0.2))
         addChild(speechBalloonNode)
         
         setupAnimation()
@@ -40,7 +42,7 @@ class InstructionScene: SKScene, ObservableObject {
         
         let presentTextAction = SKAction.sequence([
             SKAction.wait(forDuration: accumulatedTime),
-            SKAction.fadeIn(withDuration: 0.5),
+            SKAction.fadeIn(withDuration: 0.2),
             SKAction.wait(forDuration: line.duration),
         ])
         accumulatedTime += (1.0 + line.duration)

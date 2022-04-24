@@ -12,6 +12,8 @@ struct SelectionView: View {
     private let screenWidth = UIScreen.main.bounds.size.width
     private let screenHeight = UIScreen.main.bounds.size.height
     
+    @State private var selectedOption = false
+    
     @State private var images: [SelectionImage] = [
         SelectionImage(name: "good-1", isGood: true),
         SelectionImage(name: "bad-1", isGood: false),
@@ -36,7 +38,7 @@ struct SelectionView: View {
     }()
     
     @StateObject private var balloon: InstructionScene = {
-        var line: SpeechLine = SpeechLine(text: "The hacker leader is called Nick. First we need to remove images where it's hard to see Nick's face", duration: 3)
+        var line: SpeechLine = SpeechLine(text: "The hacker's leader is called Nick. First we need to remove images where it's hard to see Nick's face", duration: 3)
     
         let screenWidth = UIScreen.main.bounds.size.width
         let screenHeight = UIScreen.main.bounds.size.height
@@ -108,6 +110,7 @@ struct SelectionView: View {
                                 .scaleEffect(images[(i * 3) + j].tapped ? 0.95 : 1)
                                 .animation(.spring(response: 0.4, dampingFraction: 0.6))
                                 .onTapGesture {
+                                    selectedOption = true
                                     images[(i * 3) + j].tapped = true
                                     images[(i * 3) + j].selected = !images[(i * 3) + j].selected
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -121,14 +124,18 @@ struct SelectionView: View {
                     NavigationLink(destination: AugmentationView()) {
                         VStack {
                             Text("NEXT")
-                                .foregroundColor(.black) //Color(red: 51.0, green: 51.0, blue: 51.0)
+                                .foregroundColor(Color(red: 51 / 255, green: 51 / 255, blue: 51 / 255))
                                 .font(.system(size: 25, weight: .bold, design: .rounded))
                         }
                         .frame(width: screenWidth / 8, height: 20, alignment: .bottom)
                         .padding()
-                        .background(.yellow) //Color(red: 253, green: 207, blue: 60)
+                        .padding(.top, 10)
+                        .background(
+                            selectedOption ? Color(red: 253 / 255, green: 207 / 255, blue: 60 / 255) : Color(red: 196 / 255, green: 196 / 255, blue: 196 / 255)
+                        )
                         .cornerRadius(10)
                     }
+                    .disabled(!selectedOption)
                 }
                 .frame(
                     width: imageWidth - (imageWidth / 4) - 20,

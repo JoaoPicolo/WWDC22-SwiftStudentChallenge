@@ -13,6 +13,7 @@ struct NetworkView: View {
     private let screenHeight = UIScreen.main.bounds.size.height
     
     @State private var selectedNetwork = -1;
+    @State private var selectedOption = false
     
     @State private var images: [NetworkType] = [
         NetworkType(name: "network-1"),
@@ -98,6 +99,7 @@ struct NetworkView: View {
                                 .scaleEffect(images[(i * 2) + j].tapped ? 0.95 : 1)
                                 .animation(.spring(response: 0.4, dampingFraction: 0.6))
                                 .onTapGesture {
+                                    self.selectedOption = true
                                     selectedNetwork = (i * 2) + j
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                                         images[(i * 2) + j].tapped = false
@@ -109,16 +111,20 @@ struct NetworkView: View {
                     
                     NavigationLink(destination: FinalView()) {
                         VStack {
-                            Text("Train")
-                                .foregroundColor(.black) //Color(red: 51.0, green: 51.0, blue: 51.0)
+                            Text("TRAIN")
+                                .foregroundColor(Color(red: 51 / 255, green: 51 / 255, blue: 51 / 255))
                                 .font(.system(size: 25, weight: .bold, design: .rounded))
                         }
                         .frame(width: screenWidth / 8, height: 20, alignment: .bottom)
                         .padding()
-                        .background(.yellow) //Color(red: 253, green: 207, blue: 60)
+                        .padding(.top, 10)
+                        .background(
+                            selectedOption ? Color(red: 253 / 255, green: 207 / 255, blue: 60 / 255) : Color(red: 196 / 255, green: 196 / 255, blue: 196 / 255)
+                        )
                         .cornerRadius(10)
                         .padding(.top, 10)
                     }
+                    .disabled(!selectedOption)
                 }
                 .frame(
                     width: imageWidth - (imageWidth / 4) - 20,

@@ -14,9 +14,9 @@ struct FinalView: View {
     
     @StateObject private var scene: IntroductionScene = {
         let lines: [SpeechLine] = [
-            SpeechLine(text: "Nice, we were able to regain access to our system and retrieve our data.", duration: 3),
+            SpeechLine(text: "Perfect, using your model we can now generate a Deep Fake from Nick, and retrieve our data", duration: 3),
             SpeechLine(text: "Remember, now that you know how Deep Fakes work you must use this knlowdge only for the good", duration: 3),
-            SpeechLine(text: "After all, with great power comes great responsibility! Thank you for your good work today.", duration: 3, isLast: true)
+            SpeechLine(text: "After all, with great power comes great responsibility! Thank you for your good work today", duration: 3, isLast: true)
         ]
         
         let screenWidth = UIScreen.main.bounds.size.width

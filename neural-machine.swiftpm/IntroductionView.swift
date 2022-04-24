@@ -17,7 +17,7 @@ struct IntroductionView: View {
             SpeechLine(text: "Hi there. I’m Doctor Bouman, I'm the responsible for helping you build our Machine Learning Model", duration: 3),
             SpeechLine(text: "You probably saw in the news that a hacker group took over one of our research centers", duration: 3),
             SpeechLine(text: "This center has important data about the cure of viruses that can attack large groups of people", duration: 3),
-            SpeechLine(text: "Their leader is using facial Recognition in order to control the machines, and stop us from acessing our backups", duration: 3),
+            SpeechLine(text: "Their leader is using facial Recognition in order to control the machines, and stop us from acessing our backups", duration: 4),
             SpeechLine(text: "Can you help me build a Deep Fake in order to regain access to our system?", duration: 3, isLast: true)
         ]
         
@@ -42,21 +42,22 @@ struct IntroductionView: View {
                 
                 VStack {
                     Spacer()
-                    if scene.showedLastMessage {
+//                    if scene.showedLastMessage {
                         NavigationLink(destination: SelectionView()) {
                             VStack {
                                 Text("BUILD")
-                                    .foregroundColor(.black) //Color(red: 51.0, green: 51.0, blue: 51.0)
+                                    .foregroundColor(Color(red: 51 / 255, green: 51 / 255, blue: 51 / 255))
                                     .font(.system(size: 25, weight: .bold, design: .rounded))
                             }
                             .frame(width: screenWidth / 8, height: 20, alignment: .bottom)
                             .padding()
-                            .background(.yellow) //Color(red: 253, green: 207, blue: 60)
+                            .padding(.top, 10)
+                            .background(Color(red: 253 / 255, green: 207 / 255, blue: 60 / 255))
                             .cornerRadius(10)
                             .padding(.bottom, 30)
                             .padding(.leading, screenWidth - (screenWidth / 4))
                         }
-                    }
+//                    }
                 }
             }
             .navigationBarHidden(true)
