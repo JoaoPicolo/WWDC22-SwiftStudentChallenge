@@ -47,7 +47,7 @@ struct AugmentationView: View {
     }()
     
     @StateObject private var balloon: InstructionScene = {
-        var line: SpeechLine = SpeechLine(text: "Now we have to do the augmentation process to generate more good images, and increase our dataset.", duration: 4)
+        var line: SpeechLine = SpeechLine(text: "Now we have to do the augmentation process to generate more good images, and increase our dataset", duration: 4)
     
         let screenWidth = UIScreen.main.bounds.size.width
         let screenHeight = UIScreen.main.bounds.size.height
@@ -76,7 +76,7 @@ struct AugmentationView: View {
                             .stroke(.black, lineWidth: 0))
                         .shadow(radius: 1)
                     
-                    Text("Select the methods you want to use in order to generate more images. You're gonna have a preview of a few of the new generated images images.")
+                    Text("Select the augmentation methods in order to generate more images. You're gonna have a preview of a few of the new generated images.")
                         .foregroundColor(.white)
                         .font(.system(size: 24, weight: .regular, design: .rounded))
                 }

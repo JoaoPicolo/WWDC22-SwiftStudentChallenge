@@ -34,7 +34,7 @@ struct NetworkView: View {
     }()
     
     @StateObject private var balloon: InstructionScene = {
-        var line: SpeechLine = SpeechLine(text: "Finally we jsut need to select a machine learning architecture to train our model.", duration: 3)
+        var line: SpeechLine = SpeechLine(text: "Finally we just need to select a machine learning architecture to train our model", duration: 3)
     
         let screenWidth = UIScreen.main.bounds.size.width
         let screenHeight = UIScreen.main.bounds.size.height

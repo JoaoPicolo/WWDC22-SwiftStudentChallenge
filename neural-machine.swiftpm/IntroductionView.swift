@@ -42,7 +42,7 @@ struct IntroductionView: View {
                 
                 VStack {
                     Spacer()
-//                    if scene.showedLastMessage {
+                    if scene.showedLastMessage {
                         NavigationLink(destination: SelectionView()) {
                             VStack {
                                 Text("BUILD")
@@ -57,7 +57,7 @@ struct IntroductionView: View {
                             .padding(.bottom, 30)
                             .padding(.leading, screenWidth - (screenWidth / 4))
                         }
-//                    }
+                    }
                 }
             }
             .navigationBarHidden(true)

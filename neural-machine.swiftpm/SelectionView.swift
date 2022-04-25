@@ -68,7 +68,7 @@ struct SelectionView: View {
                             .stroke(.black, lineWidth: 0))
                         .shadow(radius: 1)
                     
-                    Text("This is Nick, remove the images were his face can't been seen clarly. This will help our machine learning model to build better videos for our Facial Identification.")
+                    Text("This is Nick, remove the images were his face can't be seen clarly. This will help our machine learning model to build better videos for our Facial Identification")
                         .foregroundColor(.white)
                         .font(.system(size: 24, weight: .regular, design: .rounded))
                 }
